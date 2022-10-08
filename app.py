@@ -72,6 +72,14 @@ def hook():
                 print(f"{mobile} sent image {image_filename}")
                 logging.info(f"{mobile} sent image {image_filename}")
 
+            elif message_type == "document":
+                document = get_messages.get_document(data)
+                document_id, mime_type = document["id"], document["mime_type"]
+                document_url = send_messages.query_media_url(document_id)
+                document_filename = send_messages.download_media(document_url, mime_type)
+                print(f"{mobile} sent document {document_filename}")
+                logging.info(f"{mobile} sent document {document_filename}")
+
             elif message_type == "video":
                 video = get_messages.get_video(data)
                 video_id, mime_type = video["id"], video["mime_type"]

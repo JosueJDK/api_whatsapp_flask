@@ -49,7 +49,7 @@ def hook():
                 message = get_messages.get_message(data)
                 name = get_messages.get_name(data)
                 logging.info("Message: %s", message)
-                send_messages.send_message(f"Hi {name}, nice to connect with you", mobile)
+                send_messages.send_message_text(f"Hi {name}, nice to connect with you", mobile)
 
             elif message_type == "interactive":
                 message_response = get_messages.get_interactive_response(data)

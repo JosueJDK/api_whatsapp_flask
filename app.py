@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 import logging
 from WhatsAppClass.WhatsAppMessage import WhatsAppMessage
 from WhatsAppClass.WhatsAppGetMessages import WhatsAppGetMessages
@@ -66,33 +67,37 @@ def hook():
 
             elif message_type == "image":
                 image = get_messages.get_image(data)
+                image_filename = 'image '+ str(datetime.now())
                 image_id, mime_type = image["id"], image["mime_type"]
                 image_url = send_messages.query_media_url(image_id)
-                image_filename = send_messages.download_media(image_url, mime_type)
+                image_filename = send_messages.download_media(image_url, mime_type, image_filename.replace(' ', '-'))
                 print(f"{mobile} sent image {image_filename}")
                 logging.info(f"{mobile} sent image {image_filename}")
 
             elif message_type == "document":
                 document = get_messages.get_document(data)
+                document_filename = document["filename"].replace(' ', '_')
                 document_id, mime_type = document["id"], document["mime_type"]
                 document_url = send_messages.query_media_url(document_id)
-                document_filename = send_messages.download_media(document_url, mime_type)
+                document_filename = send_messages.download_media(document_url, mime_type, document_filename)
                 print(f"{mobile} sent document {document_filename}")
                 logging.info(f"{mobile} sent document {document_filename}")
 
             elif message_type == "video":
                 video = get_messages.get_video(data)
+                video_filename = 'video '+ str(datetime.now())
                 video_id, mime_type = video["id"], video["mime_type"]
                 video_url = send_messages.query_media_url(video_id)
-                video_filename = send_messages.download_media(video_url, mime_type)
+                video_filename = send_messages.download_media(video_url, mime_type, video_filename.replace(' ', '-'))
                 print(f"{mobile} sent video {video_filename}")
                 logging.info(f"{mobile} sent video {video_filename}")
 
             elif message_type == "audio":
                 audio = get_messages.get_audio(data)
+                audio_filename = 'audio '+ str(datetime.now())
                 audio_id, mime_type = audio["id"], audio["mime_type"]
                 audio_url = send_messages.query_media_url(audio_id)
-                audio_filename = send_messages.download_media(audio_url, mime_type)
+                audio_filename = send_messages.download_media(audio_url, mime_type, audio_filename.replace(' ', '-'))
                 print(f"{mobile} sent audio {audio_filename}")
                 logging.info(f"{mobile} sent audio {audio_filename}")
 

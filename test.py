@@ -1,3 +1,3 @@
-from WhatsAppClass.WhatsAppGetMessages import WhatsAppGetMessages
+name = 'EXERCISES_OF_DEMOSTRATIVE_PRONOUNS.pdf'
 
-new = WhatsAppGetMessages()
+print(name.split(".")[0])

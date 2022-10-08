@@ -97,15 +97,16 @@ class WhatsApp(object):
         logging.info(f"Response: {response.json()}")
         return None
     
-    def download_media(self, media_url: str, mime_type: str, file_path: str = "temp"):
+    def download_media(self, media_url: str, mime_type: str, file_name: str = "temp"):
         response = requests.get(media_url, headers=self._headers)
         content = response.content
         extension = mime_type.split("/")[1]
+        file_name = file_name.split(".")[0]
         # create a temporary file
         try:
 
             save_file_here = (
-                f"{file_path}.{extension}" if file_path else f"temp.{extension}"
+                f"{file_name}.{extension}" if file_name else f"temp.{extension}"
             )
             with open(save_file_here, "wb") as f:
                 f.write(content)

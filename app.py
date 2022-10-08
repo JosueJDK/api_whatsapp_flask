@@ -67,7 +67,7 @@ def hook():
             elif message_type == "image":
                 image = get_messages.get_image(data)
                 image_id, mime_type = image["id"], image["mime_type"]
-                image_url = get_messages.query_media_url(image_id)
+                image_url = send_messages.query_media_url(image_id)
                 image_filename = send_messages.download_media(image_url, mime_type)
                 print(f"{mobile} sent image {image_filename}")
                 logging.info(f"{mobile} sent image {image_filename}")

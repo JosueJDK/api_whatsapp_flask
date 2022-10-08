@@ -88,7 +88,7 @@ class WhatsApp(object):
     
     def query_media_url(self, media_id: str):
         logging.info(f"Querying media url for {media_id}")
-        response = requests.get(f"{self.base_url}/{media_id}", headers=self.headers)
+        response = requests.get(f"{self._base_url}/{media_id}", headers=self._headers)
         if response.status_code == 200:
             logging.info(f"Media url queried for {media_id}")
             return response.json()["url"]
@@ -98,7 +98,7 @@ class WhatsApp(object):
         return None
     
     def download_media(self, media_url: str, mime_type: str, file_path: str = "temp"):
-        response = requests.get(media_url, headers=self.headers)
+        response = requests.get(media_url, headers=self._headers)
         content = response.content
         extension = mime_type.split("/")[1]
         # create a temporary file
